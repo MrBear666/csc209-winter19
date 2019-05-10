@@ -1,0 +1,189 @@
+Script started on Fri 22 Mar 2019 04:58:40 PM EDT
+]0;xuquan@wolf:/h/u5/c7/05/xuquan/xuquan/lab10wolf:~/xuquan/lab10$ exit [Kgdb bufserverls[Kgit pushls[Kgdb bufserver
+GNU gdb (Ubuntu 7.11.1-0ubuntu1~16.5) 7.11.1
+Copyright (C) 2016 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+<http://www.gnu.org/software/gdb/documentation/>.
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from bufserver...done.
+(gdb) break set_up_server_socket
+Breakpoint 1 at 0x400dfa: file socket.c, line 35.
+(gdb) run
+Starting program: /h/u5/c7/05/xuquan/xuquan/lab10/bufserver 
+
+Breakpoint 1, set_up_server_socket (self=0x603010, num_queue=5) at socket.c:35
+35      int set_up_server_socket(struct sockaddr_in *self, int num_queue) {
+(gdb) n
+36          int soc = socket(PF_INET, SOCK_STREAM, 0);
+(gdb) 
+37          if (soc < 0) {
+(gdb) 
+44          int on = 1;
+(gdb) 
+45          int status = setsockopt(soc, SOL_SOCKET, SO_REUSEADDR,
+(gdb) 
+47          if (status < 0) {
+(gdb) 
+53          if (bind(soc, (struct sockaddr *)self, sizeof(*self)) < 0) {
+(gdb) 
+60          if (listen(soc, num_queue) < 0) {
+(gdb) 
+66          return soc;
+(gdb) 
+67      }
+(gdb) 
+main () at bufserver.c:27
+27              int fd = accept_connection(listenfd);
+(gdb) 
+Waiting for a new connection...
+New connection accepted from 127.0.0.1:47658
+28              if (fd < 0) {
+(gdb) 
+33              char buf[BUFSIZE] = {'\0'};
+(gdb) 
+34              int inbuf = 0;           // How many bytes currently in buffer?
+(gdb) 
+35              int room = sizeof(buf);  // How many bytes remaining in buffer?
+(gdb) 
+36              char *after = buf;       // Pointer to position after the data in buf
+(gdb) 
+39              while ((nbytes = read(fd, after, room)) > 0) {
+(gdb) exit[K[K[K[K
+41                  inbuf += nbytes;
+(gdb) 
+51                  while ((where = find_network_newline(buf, inbuf)) > 0) {
+(gdb) 
+57                      buf[where - 2] = '\0';
+(gdb) 
+60                      printf("Next message: %s\n", buf);
+(gdb) 
+Next message: A stitch in time
+66                      inbuf -= where;
+(gdb) 
+71                      memmove(&buf[0], &buf[where], inbuf);
+(gdb) 
+51                  while ((where = find_network_newline(buf, inbuf)) > 0) {
+(gdb) 
+76                  room = BUFSIZE - inbuf;
+(gdb) 
+77                      after = &buf[inbuf];
+(gdb) 
+39              while ((nbytes = read(fd, after, room)) > 0) {
+(gdb) 
+41                  inbuf += nbytes;
+(gdb) 
+51                  while ((where = find_network_newline(buf, inbuf)) > 0) {
+(gdb) 
+57                      buf[where - 2] = '\0';
+(gdb) 
+60                      printf("Next message: %s\n", buf);
+(gdb) 
+Next message: A stitch in time
+66                      inbuf -= where;
+(gdb) 
+71                      memmove(&buf[0], &buf[where], inbuf);
+(gdb) 
+51                  while ((where = find_network_newline(buf, inbuf)) > 0) {
+(gdb) 
+76                  room = BUFSIZE - inbuf;
+(gdb) 
+77                      after = &buf[inbuf];
+(gdb) 
+39              while ((nbytes = read(fd, after, room)) > 0) {
+(gdb) 
+41                  inbuf += nbytes;
+(gdb) 
+51                  while ((where = find_network_newline(buf, inbuf)) > 0) {
+(gdb) 
+57                      buf[where - 2] = '\0';
+(gdb) 
+60                      printf("Next message: %s\n", buf);
+(gdb) 
+Next message: A stitch in time
+66                      inbuf -= where;
+(gdb) 
+71                      memmove(&buf[0], &buf[where], inbuf);
+(gdb) 
+51                  while ((where = find_network_newline(buf, inbuf)) > 0) {
+(gdb) 
+76                  room = BUFSIZE - inbuf;
+(gdb) 
+77                      after = &buf[inbuf];
+(gdb) 
+39              while ((nbytes = read(fd, after, room)) > 0) {
+(gdb) 
+41                  inbuf += nbytes;
+(gdb) 
+51                  while ((where = find_network_newline(buf, inbuf)) > 0) {
+(gdb) 
+57                      buf[where - 2] = '\0';
+(gdb) 
+60                      printf("Next message: %s\n", buf);
+(gdb) 
+Next message: A stitch in time
+66                      inbuf -= where;
+(gdb) 
+71                      memmove(&buf[0], &buf[where], inbuf);
+(gdb) 
+51                  while ((where = find_network_newline(buf, inbuf)) > 0) {
+(gdb) 
+76                  room = BUFSIZE - inbuf;
+(gdb) 
+77                      after = &buf[inbuf];
+(gdb) 
+39              while ((nbytes = read(fd, after, room)) > 0) {
+(gdb) 
+41                  inbuf += nbytes;
+(gdb) 
+51                  while ((where = find_network_newline(buf, inbuf)) > 0) {
+(gdb) 
+57                      buf[where - 2] = '\0';
+(gdb) 
+60                      printf("Next message: %s\n", buf);
+(gdb) 
+Next message: A stitch in time
+66                      inbuf -= where;
+(gdb) 
+71                      memmove(&buf[0], &buf[where], inbuf);
+(gdb) 
+51                  while ((where = find_network_newline(buf, inbuf)) > 0) {
+(gdb) 
+76                  room = BUFSIZE - inbuf;
+(gdb) 
+77                      after = &buf[inbuf];
+(gdb) 
+39              while ((nbytes = read(fd, after, room)) > 0) {
+(gdb) 
+79              close(fd);
+(gdb) 
+27              int fd = accept_connection(listenfd);
+(gdb) 
+Waiting for a new connection...
+
+
+
+exit
+^C
+Program received signal SIGINT, Interrupt.
+0x00007ffff7b150a0 in __accept_nocancel ()
+    at ../sysdeps/unix/syscall-template.S:84
+84      ../sysdeps/unix/syscall-template.S: No such file or directory.
+(gdb) quit
+A debugging session is active.
+
+        Inferior 1 [process 20403] will be killed.
+
+Quit anyway? (y or n) y
+]0;xuquan@wolf:/h/u5/c7/05/xuquan/xuquan/lab10wolf:~/xuquan/lab10$ exiyt[K[Kt
+exit
+
+Script done on Fri 22 Mar 2019 05:02:10 PM EDT

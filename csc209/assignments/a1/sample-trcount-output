@@ -1,0 +1,9 @@
+Reference Counts by Type:
+    Instructions: 7
+    Modifications: 0
+    Loads: 2
+    Stores: 3
+Data Reference Counts by Location:
+    Globals: 4
+    Heap: 0
+    Stack: 1

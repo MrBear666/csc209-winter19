@@ -1,0 +1,8 @@
+cat
+hippopotamus
+dog
+horse
+elephant
+monkey
+mouse
+tarantula
